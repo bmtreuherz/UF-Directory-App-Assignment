@@ -6,3 +6,25 @@
   max-height: 400px;
   overflow: auto;
 }
+
+.listingItem {
+  cursor: pointer;
+}
+
+.coord{
+  float:left;
+  width: 48.5% !important;
+}
+
+.lat{
+  margin-right: 1.5%;
+}
+
+.long{
+  margin-left: 1.5%;
+}
+
+.addBtn{
+  margin: 3% auto;
+  width: 40%
+}

@@ -12,11 +12,6 @@
       <div class="row" ng-controller="ListingsController">
         <div class="col-md-6">
           <div class="input-group" id="searchBar">
-            <!--
-
-                Implement a way to filter through listings using the search bar
-
-              -->
             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
             <input type="text" class="form-control" placeholder="Search" ng-model="searchText">
           </div>
@@ -32,75 +27,70 @@
                 <td>{{item.name}}</td>
                 <td><span class="glyphicon glyphicon-remove-circle" ng-click="deleteListing(item)"></span></td>
               </tr>
-              <!--
-
-                  Fill in the rest of the table:
-                      * populate the rows with the code and name of each listing
-                      * include a way to remove individual listings
-
-                -->
             </table>
           </div>
-          <form class="input-group" id="newListing" ng-submit="addListing()">
-            <h2>Add New Listing</h2>
-            <div class="form-group">
-              <label for="code">Code:</label>
-              <input type="text" class="form-control" id="code" ng-model="newListing.code" placeholder="Code">
-            </div>
-            <div class="form-group">
-              <label for="name">Name:</label>
-              <input type="text" class="form-control" id="name" ng-model="newListing.name" placeholder="Name">
-            </div>
-            <div class="form-group">
-              <label>Coordinates:</label>
-              <div class="form-group">
-                <input type="text" class="form-control coord lat" id="latitude" ng-model="newListing.coordinates.latitude" placeholder="Latitude">
-                <input type="text" class="form-control coord long" id="longitude" ng-model="newListing.coordinates.longitude" placeholder="Longitude">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="address">Address:</label>
-              <input type="text" class="form-control" id="address" ng-model="newListing.address" placeholder="Address">
-            </div>
-            <div class="form-group">
-              <button type="submit" name="addListingBtn" class="btn btn-default addBtn">Add Listing</button>
-            </div>
-          </form>
-          <!--
-
-              Write an HTML form that adds new listings to the directory
-
-            -->
         </div>
         <div class="col-md-6">
           <div class="jumbotron">
-            <h2>Detailed Information</h2>
-            <label>Code:</label>
-             <div>
-               {{currentDetail.code}}
-             </div>
-             <label>Name:</label>
-             <div>
-               {{currentDetail.name}}
-             </div>
-              <label>Latitude:</label>
-             <div>
-               {{currentDetail.coordinates.latitude}}
-             </div>
-             <label>Longitude:</label>
-             <div>
-               {{currentDetail.coordinates.longitude}}
-             </div>
-             <label>Address:</label>
-             <div>
-              {{currentDetail.address}}
-             </div>
-            <!--
-
-              Include a way to display detailed information about an individual listing:
-                   * consider how to use ng-click within the the table to implement this feature
-
-             -->
+            <div class="DetailedInfo" ng-show="showDets">
+              <h2>Detailed Information</h2>
+              <div ng-show="currentDetail.name">
+                <label>Code:</label>
+                 <div>
+                   {{currentDetail.code}}
+                 </div>
+                 <label>Name:</label>
+                 <div>
+                   {{currentDetail.name}}
+                 </div>
+                  <label>Latitude:</label>
+                 <div>
+                   {{currentDetail.coordinates.latitude}}
+                 </div>
+                 <label>Longitude:</label>
+                 <div>
+                   {{currentDetail.coordinates.longitude}}
+                 </div>
+                 <label>Address:</label>
+                 <div>
+                  {{currentDetail.address}}
+                 </div>
+              </div>
+              <div ng-hide="currentDetail.name">
+                <p>
+                  Select an entry from the table to view details.
+                </p>
+              </div>
+            </div>
+            <form class="input-group" id="newListing" ng-submit="addListing()" ng-hide="showDets">
+              <h2>Add New Listing</h2>
+              <div class="form-group">
+                <label for="code">Code:</label>
+                <input type="text" class="form-control" id="code" ng-model="newListing.code" placeholder="Code">
+              </div>
+              <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" ng-model="newListing.name" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label>Coordinates:</label>
+                <div class="form-group">
+                  <input type="text" class="form-control coord lat" id="latitude" ng-model="newListing.coordinates.latitude" placeholder="Latitude">
+                  <input type="text" class="form-control coord long" id="longitude" ng-model="newListing.coordinates.longitude" placeholder="Longitude">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" ng-model="newListing.address" placeholder="Address">
+              </div>
+              <div class="form-group">
+                <button type="submit" name="addListingBtn" class="btn btn-default addBtn">Add Listing</button>
+                <button type="button" name="cancel" class="btn btn-default addBtn" ng-click="clearForm()">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <div class="form-group">
+            <button style="margin-top: 0;" ng-show="showDets" type="button" name="showAddForm" class="btn btn-default addBtn" ng-click="showDets = !showDets">Add Listing</button>
           </div>
         </div>
       </div>

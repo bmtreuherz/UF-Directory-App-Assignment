@@ -5,6 +5,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     $scope.newListing = {};
     $scope.currentDetail = {};
     $scope.var = $scope.listings.length;
+    $scope.showDets = true;
 
     /*
       Implement these functions in the controller to make your application function
@@ -13,7 +14,13 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     $scope.addListing = function() {
       $scope.listings.push($scope.newListing);
       $scope.newListing = {};
+      $scope.showDets = true;
     };
+
+    $scope.clearForm = function(){
+      $scope.showDets = true;
+      $scope.newListing = {};
+    }
 
     // I am passing in the object rather than the index because when a filter is
     // applied the index in ng-repeat will not match the index in listings.
@@ -22,6 +29,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
       var index = $scope.listings.indexOf(listing);
       $scope.listings.splice(index, 1);
     };
+
     $scope.showDetails = function(listing) {
       console.log("show detes");
       var index = $scope.listings.indexOf(listing);

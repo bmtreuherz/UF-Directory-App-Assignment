@@ -47,6 +47,6 @@
   background-color: #ff9d3d;
 }
 
-.table{
-  background-color: #ffefde;
-}
+.table-striped>tbody>tr:nth-child(even)>td{
+   background-color: #ffefde;
+ }

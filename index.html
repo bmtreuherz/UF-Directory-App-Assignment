@@ -34,7 +34,7 @@
           <div class="jumbotron">
             <div class="DetailedInfo" ng-show="showDets">
               <h2>Detailed Information</h2>
-              <div ng-show="currentDetail.name">
+              <div ng-show="currentDetail.name || currentDetail.code">
                 <label>Code:</label>
                  <div>
                    {{currentDetail.code}}
@@ -56,7 +56,7 @@
                   {{currentDetail.address}}
                  </div>
               </div>
-              <div ng-hide="currentDetail.name">
+              <div ng-hide="currentDetail.name || currentDetail.code">
                 <p>
                   Select an entry from the table to view details.
                 </p>

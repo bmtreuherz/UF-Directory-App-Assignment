@@ -21,13 +21,11 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     // I am passing in the object rather than the index because when a filter is
     // applied the index in ng-repeat will not match the index in listings.
     $scope.deleteListing = function(listing) {
-      console.log('Delete');
       var index = $scope.listings.indexOf(listing);
       $scope.listings.splice(index, 1);
     };
 
     $scope.showDetails = function(listing) {
-      console.log("show detes");
       var index = $scope.listings.indexOf(listing);
       $scope.currentDetail = $scope.listings[index];
     };

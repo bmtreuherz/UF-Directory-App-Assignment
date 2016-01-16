@@ -18,6 +18,8 @@ fs.readFile('listings.json', 'utf8', function (err, data) {
   if (err)  throw err;
 
   listings = JSON.parse(data);
+  var numListings = listings.entries.length;
+  var entriesSaved = 0;
 
   // Loop through the listings and save each to the db
   listings.entries.forEach(function(lst){
@@ -27,16 +29,11 @@ fs.readFile('listings.json', 'utf8', function (err, data) {
       if (err) throw err;
 
       console.log("Listing Created.");
+
+      // Close the connection if all entries have been saved.
+      entriesSaved++;
+      if (entriesSaved == numListings)
+        mongoose.disconnect();
     })
   })
 });
-/*
-  Instantiate a mongoose model for each listing object in the JSON file,
-  and then save it to your Mongo database
- */
-
-
-/*
-  Once you've written + run the script, check out your MongoLab database to ensure that
-  it saved everything correctly.
- */

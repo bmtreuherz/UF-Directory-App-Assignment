@@ -6,6 +6,15 @@ var mongoose = require('mongoose'),
 /* Connect to the database */
 mongoose.connect(config.db.uri);
 
+// Providing a way to check that all the callbacks have completed.
+var operationsRequired = 4;
+var operationsCompleted = 0;
+
+var closeConnection = function(){
+  if (operationsCompleted == operationsRequired)
+    mongoose.disconnect();
+}
+
 var findLibraryWest = function() {
   /*
     Find the document that contains data corresponding to Library West,
@@ -17,6 +26,9 @@ var findLibraryWest = function() {
      // output the found listing
      console.log('Library West:\n')
      console.log(listing + '\n');
+
+     operationsCompleted++;
+     closeConnection();
    });
 };
 var removeCable = function() {
@@ -38,9 +50,13 @@ var removeCable = function() {
          if(err) throw err;
 
          console.log("Listing successfully deleted." + '\n');
+         operationsCompleted++;
+         closeConnection();
        });
      }else{
        console.log('The CABL document does not exist\n');
+       operationsCompleted++;
+       closeConnection();
      }
 
    })
@@ -56,6 +72,9 @@ var updatePhelpsMemorial = function() {
 
     console.log('Update Phelps address\n');
     console.log(listing + '\n');
+
+    operationsCompleted++;
+    closeConnection();
   });
 };
 var retrieveAllListings = function() {
@@ -68,8 +87,10 @@ var retrieveAllListings = function() {
      // Display the listings in the console.
      console.log("All listings\n");
      console.log(listing + '\n');
-   })
 
+     operationsCompleted++;
+     closeConnection();
+   })
 };
 
 // Note the console logging may appear out of order as callbacks come in.
